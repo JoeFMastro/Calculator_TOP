@@ -23,7 +23,7 @@ function operate(op, num1, num2) {
   if (op === "+") return add(num1, num2);
   if (op === "-") return subtract(num1, num2);
   if (op === "*") return multiply(num1, num2);
-  if (op === "/") return divide(num1, num2);
+  if (op === "÷") return divide(num1, num2);
 }
 
 
@@ -44,6 +44,10 @@ function updateExpression(val) {
 }
 
 
+function roundResult(number) {
+  return Math.round(number * 1000) / 1000;
+}
+
 function addNumber(num) {
   if (displayReset) {
     firstNumber = "";
@@ -55,25 +59,22 @@ function addNumber(num) {
     updateDisplay(firstNumber);
   } else {
     // adding second number
-    secondNumber += digit;
+    secondNumber += num;
     updateDisplay(secondNumber);
   }
 }
 
 function setOperator(op) {
-  // If we have both numbers and an operator, evaluate first
   if (firstNumber !== '' && secondNumber !== '' && operator !== '') {
     calculate();
     if (display.textContent?.startsWith("Don't"))
       return; // error state
   }
-  // If there's no first number, do nothing
   if (firstNumber === '')
     return;
-  // Update operator (allow changing operator without evaluating)
   operator = op;
   secondNumber = '';
-  shouldResetDisplay = false;
+  displayReset = false;
   updateExpression(`${firstNumber} ${operator}`);
 }
 
@@ -86,7 +87,9 @@ function calculate() {
   if (typeof result === 'string') {
     updateDisplay(result);
     updateExpression('');
-    clearState();
+    firstNumber = "";
+    secondNumber = "";
+    operator = "";
     return;
   }
   const resultStr = roundResult(result);
@@ -95,5 +98,33 @@ function calculate() {
   firstNumber = resultStr;
   secondNumber = '';
   operator = '';
-  shouldResetDisplay = true;
+  displayReset = true;
 }
+
+function clearAll() {
+  firstNumber = "";
+  secondNumber = "";
+  operator = "";
+  updateDisplay('0');
+  updateExpression('');
+}
+
+function backSpace() {
+  if (displayReset)
+    return;
+  if (operator === "") {
+    firstNumber = firstNumber.slice(0, -1); // elimina el ultimo elemento del string
+    updateDisplay(firstNumber || "0");
+  } else {
+    secondNumber = secondNumber.slice(0, -1);
+    updateDisplay(secondNumber || '0');
+  }
+}
+
+
+//para que HTML pueda acceder a las funciones
+window.addNumber = addNumber;
+window.setOperator = setOperator;
+window.calculate = calculate;
+window.clearAll = clearAll;
+window.backSpace = backSpace;
