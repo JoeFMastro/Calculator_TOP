@@ -1,0 +1,125 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#calculatorContainer {
+  width: 340px;
+  background: #111827;
+  border-radius: 22px;
+  padding: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.display-wrapper {
+  grid-column: 1 / -1;
+  min-height: 100px;
+  background: #1f2937;
+  border-radius: 16px;
+  padding: 14px 16px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  margin-bottom: 6px;
+  overflow: hidden;
+}
+
+.expression {
+  width: 100%;
+  text-align: right;
+  font-size: 0.95rem;
+  color: #94a3b8;
+  min-height: 22px;
+  word-break: break-word;
+}
+
+.display {
+  width: 100%;
+  text-align: right;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #f8fafc;
+  word-break: break-word;
+}
+
+.btn {
+  border: none;
+  border-radius: 14px;
+  padding: 18px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+  color: white;
+  transition: transform 0.15s ease, opacity 0.15s ease, background 0.15s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.95;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-number {
+  background: #374151;
+}
+
+.btn-number:hover {
+  background: #4b5563;
+}
+
+.btn-operator {
+  background: #2563eb;
+}
+
+.btn-operator:hover {
+  background: #1d4ed8;
+}
+
+.btn-clear {
+  background: #dc2626;
+}
+
+.btn-clear:hover {
+  background: #b91c1c;
+}
+
+.btn-delete {
+  background: #d97706;
+}
+
+.btn-delete:hover {
+  background: #b45309;
+}
+
+.btn-equals {
+  background: #059669;
+  grid-row: span 2;
+}
+
+.btn-equals:hover {
+  background: #047857;
+}
+
+.btn-zero {
+  grid-column: span 3;
+}

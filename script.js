@@ -67,7 +67,7 @@ function addNumber(num) {
 function setOperator(op) {
   if (firstNumber !== '' && secondNumber !== '' && operator !== '') {
     calculate();
-    if (display.textContent?.startsWith("Don't"))
+    if (display.textContent?.startsWith("Error"))
       return; // error state
   }
   if (firstNumber === '')
